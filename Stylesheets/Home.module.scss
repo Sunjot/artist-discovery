@@ -1,0 +1,95 @@
+@import 'global';
+
+#home {
+  @include flex(column, flex-start, center);
+  width: 100%;
+
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  #titleWrap {
+    @include flex(row, flex-start, flex-end);
+    margin-top: 150px;
+
+    #titleLarge {
+      font-size: 65px;
+      font-family: 'Open Sans Condensed';
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgb(132, 30, 201);
+      animation: fadein 1s forwards;
+      opacity: 0;
+    }
+
+    #titleSmall {
+      font-size: 20px;
+      font-family: 'Quicksand';
+      text-transform: uppercase;
+      margin: 0 0 15px 5px;
+      animation: fadein 2s forwards;
+      animation-delay: 0.8s;
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideupandin {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    10% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #optionWrap {
+    @include flex(row, flex-start, center);
+
+    .option {
+      @include flex(row, center, center);
+      width: 240px;
+      height: 70px;
+      border: 1px solid rgb(160, 160, 160);
+      border-radius: 3px;
+      margin: 30px 15px 30px 15px;
+      font-size: 30px;
+      font-family: 'Open Sans Condensed';
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.5s, transform 0.5s;
+      animation: slideupandin 1.5s forwards;
+      animation-delay: 1.5s;
+      opacity: 0;
+      transform: translateY(10px);
+
+      &:hover {
+        border-color: white;
+
+        span {
+          transform: scale(1.03);
+        }
+      }
+
+      span {
+        @include flex(row, center, center);
+        transition: transform 0.5s;
+        letter-spacing: 0.5px;
+
+        svg {
+          margin: 0 4px 0 0;
+        }
+      }
+    }
+  }
+}

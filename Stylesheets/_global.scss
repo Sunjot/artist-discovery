@@ -1,0 +1,51 @@
+@mixin flex($direction, $justify, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+  
+$xs-width: 320px;
+$sm-width: 400px;
+$md-width: 600px;
+$lg-width: 800px;
+$xl-width: 1000px;
+$xxl-width: 1200px;
+
+@mixin xs {
+  @media (min-width: #{$xs-width}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (min-width: #{$sm-width}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$md-width}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$lg-width}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$xl-width}) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (min-width: #{$xxl-width}) {
+    @content;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Quicksand|Open+Sans+Condensed:700');  
