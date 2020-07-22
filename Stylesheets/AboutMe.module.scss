@@ -1,0 +1,32 @@
+@import 'global';
+
+.aboutMe {
+  @include flex(column, flex-start, center);
+  width: 100%;
+
+  .title {
+    font-family: 'Open Sans Condensed';
+    font-size: 50px;
+    margin: 50px 0 20px 0;
+    text-transform: uppercase;
+    color: rgb(132, 30, 201);
+  }
+
+  .description {
+    text-align: center;
+
+    .subtitle {
+      font-family: 'Open Sans Condensed';
+      font-size: 30px;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-family: 'Quicksand';
+      font-size: 20px;
+      margin: 0 0 20px 0;
+      width: 500px;
+    }
+  }
+}

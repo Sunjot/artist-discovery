@@ -1,0 +1,20 @@
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.infoIcon {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  cursor: pointer;
+
+  &:hover {
+    animation: rotate 0.5s;
+  }
+}
