@@ -1,13 +1,37 @@
 @import 'global';
 
-.aboutMe {
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fadeout {
+  animation: fadeout 0.2s forwards !important;
+}
+
+#aboutMe {
   @include flex(column, flex-start, center);
   width: 100%;
+  opacity: 0;
+  animation: fadein 0.5s forwards;
 
   .title {
     font-family: 'Open Sans Condensed';
     font-size: 50px;
-    margin: 50px 0 20px 0;
+    margin: 30px 0 20px 0;
     text-transform: uppercase;
     color: rgb(132, 30, 201);
   }
@@ -25,8 +49,8 @@
     p {
       font-family: 'Quicksand';
       font-size: 20px;
-      margin: 0 0 20px 0;
-      width: 500px;
+      margin: 0 0 40px 0;
+      width: 400px;
     }
   }
 }

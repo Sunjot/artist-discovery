@@ -2,9 +2,14 @@ import styles from '../Stylesheets/Home.module.scss';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import useSwr from 'swr';
 
-const InfoIcon = dynamic(() => import('../components/InfoIcon'));
-const TextInput = dynamic(() => import('../components/TextInput'));
+const MusicSVG = dynamic(() => import('./svg/Music'));
+const UserSVG = dynamic(() => import('./svg/User'));
+const InfoSVG = dynamic(() => import('./svg/Info'));
+const TextInput = dynamic(() => import('./TextInput'));
+
+const fetcher = (url: string) => fetch(url, {method: 'POST'}).then((res) => res.json())
 
 const Home = () => {
   const router = useRouter();
@@ -15,6 +20,9 @@ const Home = () => {
     genreStroke: "rgb(29, 29, 29)",
     artistStroke: "rgb(228, 228, 228)" });
   const [fadeout, setFadeout] = useState(false);
+  const [fetchData, setFetchData] = useState(false);
+
+  const {data, error} = useSwr(fetchData? '/api/search' : null, fetcher);
 
   const optionClick = (kind: string) => {
 
@@ -31,12 +39,12 @@ const Home = () => {
     
     setTimeout(() => {
       router.push('/about');
-    }, 400);
+    }, 300);
   }
 
   return(
     <div id={styles.home} className={fadeout? styles.fadeout : ""}>
-      <InfoIcon handleClick={infoClick} />
+      <InfoSVG handleClick={infoClick}/>
       <hgroup id={styles.titleWrap}>
         <h1 id={styles.titleLarge}>Artist Discovery</h1>
         <h2 id={styles.titleSmall}>Powered by Spotify</h2>
@@ -45,19 +53,13 @@ const Home = () => {
         <section id={styles.optionWrap}>
           <div id={selection.genre} className={styles.option} onClick={() => optionClick("genre")} style={{transform: 'translateX(1px)'}}>
             <span>
-              <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-music" width="28" height="28" viewBox="0 0 24 24" strokeWidth="1.5" stroke={selection.genreStroke} fill="none" strokeLinecap="round" strokeLinejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z"/><circle cx="6" cy="17" r="3" />
-                <circle cx="16" cy="17" r="3" /><polyline points="9 17 9 4 19 4 19 17" /><line x1="9" y1="8" x2="19" y2="8" />
-              </svg>
+              <MusicSVG width="28" height="28" stroke={selection.genreStroke}/>
               Genre
             </span>
           </div>
           <div id={selection.artist} className={styles.option} onClick={() => optionClick("artist")}>
             <span>
-              <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width="28" height="28" viewBox="0 0 24 24" strokeWidth="1.5" stroke={selection.artistStroke} fill="none" strokeLinecap="round" strokeLinejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4" />
-                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-              </svg>
+              <UserSVG width="28" height="28" stroke={selection.artistStroke}/>
               Artist
             </span>
           </div>

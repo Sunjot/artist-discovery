@@ -1,0 +1,40 @@
+@import 'global';
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.info {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  cursor: pointer;
+
+  &:hover {
+    animation: rotate 0.5s;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+
+  &:hover {
+    animation: rotate 0.5s;
+  }
+}
+
+.music {
+  @include flex(row, center, center);
+}
+
+.user {
+  @include flex(row, center, center);
+}
