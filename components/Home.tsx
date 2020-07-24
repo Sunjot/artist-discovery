@@ -2,14 +2,12 @@ import styles from '../Stylesheets/Home.module.scss';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import useSwr from 'swr';
 
 const MusicSVG = dynamic(() => import('./svg/Music'));
 const UserSVG = dynamic(() => import('./svg/User'));
 const InfoSVG = dynamic(() => import('./svg/Info'));
 const TextInput = dynamic(() => import('./TextInput'));
-
-const fetcher = (url: string) => fetch(url, {method: 'POST'}).then((res) => res.json())
+const ResultList = dynamic(() => import('./ResultList'));
 
 const Home = () => {
   const router = useRouter();
@@ -20,9 +18,7 @@ const Home = () => {
     genreStroke: "rgb(29, 29, 29)",
     artistStroke: "rgb(228, 228, 228)" });
   const [fadeout, setFadeout] = useState(false);
-  const [fetchData, setFetchData] = useState(false);
-
-  const {data, error} = useSwr(fetchData? '/api/search' : null, fetcher);
+  const [value, setValue] = useState('');
 
   const optionClick = (kind: string) => {
 
@@ -40,6 +36,10 @@ const Home = () => {
     setTimeout(() => {
       router.push('/about');
     }, 300);
+  }
+
+  const handleValueChange = (e: any) => {
+    setValue(e.target.value);
   }
 
   return(
@@ -64,10 +64,10 @@ const Home = () => {
             </span>
           </div>
         </section>
-        <TextInput placeholderName="Search" />
+        <TextInput value={value} handleValueChange={handleValueChange} placeholderName="Search" />
       </section>
+      {value.length > 0 && <ResultList value={value}/> }
     </div>
   );
 }
-
 export default Home; 
