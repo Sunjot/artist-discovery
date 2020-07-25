@@ -2,6 +2,7 @@ const { createServer } = require('http')
 const { parse } = require('url')
 const next = require('next')
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -11,6 +12,8 @@ let ACCESS_TOKEN = {};
 
 app.prepare().then(() => {
   const server = express();
+  server.use(bodyParser.urlencoded({ extended: false }));
+  server.use(bodyParser.json());
 
   server.get('/', (req, res) => {
     app.render(req, res, '/index', {})
@@ -20,7 +23,7 @@ app.prepare().then(() => {
     app.render(req, res, '/about', {})
   });
 
-  server.post('/api/search', async (req, res) => {
+  server.post('/api/search/genre', async (req, res) => {
     
     let response = await fetchFunction("https://api.spotify.com/v1/recommendations/available-genre-seeds");
     if (response.error) {
@@ -32,6 +35,22 @@ app.prepare().then(() => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(response));
+  });
+
+  server.post('/api/search/artist', async (req, res) => {
+
+    let link = "https://api.spotify.com/v1/search?q=" + req.body.query + "&type=artist";
+    let response = await fetchFunction(link);
+
+    res.setHeader('Content-Type', 'application/json');
+    if (response.error) {
+      res.statusCode = 500;
+      res.end(JSON.stringify({message: 'Server Error'}));
+    }
+
+    res.statusCode = 200;
+    res.end(JSON.stringify(response));
+
   });
 
   server.get('*', (req, res, next) => {

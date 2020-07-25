@@ -12,7 +12,7 @@ const TextInput = ({placeholderName, value, handleValueChange, ...props}: IProps
   const [focusedInput, setFocusedInput] = useState(false);
 
   const focus = (focus: boolean) => {
-    if (focus) setFocusedInput(true);
+    if (focus || !focus && value && value.length > 0) setFocusedInput(true);
     else setFocusedInput(false);
   }
 

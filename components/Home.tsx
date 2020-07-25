@@ -19,14 +19,19 @@ const Home = () => {
     artistStroke: "rgb(228, 228, 228)" });
   const [fadeout, setFadeout] = useState(false);
   const [value, setValue] = useState('');
+  const [option, setOption] = useState('genre');
 
   const optionClick = (kind: string) => {
 
     if (kind === "genre" && selection.genre === styles.unselected) {
+      setValue('');
       setSelection({genre: styles.selected, artist: styles.unselected, genreStroke: "rgb(29, 29, 29)", artistStroke: "rgb(228, 228, 228)"});
+      setOption('genre');
     }
     if (kind === "artist" && selection.artist === styles.unselected) {
+      setValue('');
       setSelection({genre: styles.unselected, artist: styles.selected, genreStroke: "rgb(228, 228, 228)", artistStroke: "rgb(29, 29, 29)"});
+      setOption('artist');
     }
   }
 
@@ -66,7 +71,7 @@ const Home = () => {
         </section>
         <TextInput value={value} handleValueChange={handleValueChange} placeholderName="Search" />
       </section>
-      {value.length > 0 && <ResultList value={value}/> }
+      {value.length > 0 && <ResultList value={value} option={option}/> }
     </div>
   );
 }

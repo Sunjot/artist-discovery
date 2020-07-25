@@ -1,0 +1,58 @@
+@import 'global';
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.resultList {
+  @include flex(row, center, flex-start);
+  width: 774px;
+  height: 200px;
+  background-color: #e4e4e4;
+  margin: 4px;
+  animation: fadein 0.3s forwards;
+  opacity: 0;
+  border-radius: 3px;
+  color: rgb(29, 29, 29);
+  overflow-y: scroll;
+
+  .column {
+    @include flex(column, flex-start, center);
+    width: 50%;
+    border-right: 1px solid rgb(206, 206, 206);
+    overflow-x: hidden;
+
+    .result {
+      @include flex(row, flex-start, center);
+      width: 100%;
+      border-bottom: 1px solid rgb(206, 206, 206);
+      padding: 10px;
+      font-family: 'Open Sans Condensed';
+      font-size: 22px;
+      cursor: pointer;
+      box-sizing: border-box;
+      text-transform: uppercase;
+      transition: background-color 0.3s;
+
+      .artistName {
+        padding: 10px;
+      }
+
+      img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+
+      &:hover {
+        background-color: #dadada;
+      }
+    }
+  }
+}
