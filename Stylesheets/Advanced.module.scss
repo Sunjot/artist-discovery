@@ -1,7 +1,21 @@
+@import 'global';
 
 .advanced {
+  @include flex(column, flex-start, center);
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 350px;
+  background-color: rgb(29, 29, 29);
+  z-index: 10;
+  border-radius: 10px;
+  color: rgb(228, 228, 228);
+  border: 1px solid white;
+
+  h2 {
+    font-family: 'Open Sans Condensed';
+    font-size: 25px;
+  }
 }

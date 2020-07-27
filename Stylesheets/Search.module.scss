@@ -1,0 +1,24 @@
+@import 'global';
+
+@keyframes fadeupandin {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#searchWrap {
+  @include flex(row, center, flex-start);
+  margin: 30px 0 0 0;
+  animation: fadeupandin 1.3s forwards;
+  opacity: 0;
+  transform: translateY(10px);
+
+  #optionWrap {
+    @include flex(row, flex-start, center);
+  }
+}
