@@ -26,14 +26,14 @@ app.prepare().then(() => {
   server.post('/api/search/genre', async (req, res) => {
     
     let response = await fetchFunction("https://api.spotify.com/v1/recommendations/available-genre-seeds");
+    
+    res.setHeader('Content-Type', 'application/json');
     if (response.error) {
       res.statusCode = 500;
-      res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({message: 'Server Error'}));
     }
 
     res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(response));
   });
 

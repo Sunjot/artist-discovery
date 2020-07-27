@@ -31,10 +31,6 @@
   }
 }
 
-.music {
-  @include flex(row, center, center);
-}
-
-.user {
+.music, .user, .clipboard {
   @include flex(row, center, center);
 }
